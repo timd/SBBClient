@@ -32,13 +32,15 @@ static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
+
     UIBarButtonItem *loadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didTapLoadButton:)];
     self.navigationItem.rightBarButtonItem = loadButton;
     
     self.stationsArray = [[NSMutableArray alloc] init];
+    
+    self.title = @"Stations";
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,7 +87,7 @@ static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         Station *selectedStation = [self.stationsArray objectAtIndex:indexPath.row];
-        [[segue destinationViewController] setDetailItem:selectedStation];
+        [[segue destinationViewController] setStation:selectedStation];
         
     }
 }

@@ -7,19 +7,27 @@
 //
 
 #import "DetailViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface DetailViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *stationNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stationIdLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stationScoreLabel;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 - (void)configureView;
+
 @end
 
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setStation:(Station *)newStation
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+    if (_station != newStation) {
+        _station = newStation;
         
         // Update the view.
         [self configureView];
@@ -29,9 +37,17 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
+    self.title = self.station.name;
 
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    if (self.station) {
+        
+        self.stationIdLabel.text = [NSString stringWithFormat:@"%@", [self.station stationId]];
+        
+        [self.mapView setCenterCoordinate:self.station.locationCoordinate];
+
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.station.locationCoordinate, 750, 750);
+        MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+        [self.mapView setRegion:adjustedRegion animated:YES];
     }
 }
 
