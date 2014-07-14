@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBBClient.h"
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UITableViewController <SBBClientDelegate>
 
 @end

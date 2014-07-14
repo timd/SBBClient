@@ -18,6 +18,7 @@ static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
 @interface MasterViewController ()
 
 @property (nonatomic, strong) NSMutableArray *stationsArray;
+@property (nonatomic, strong) SBBClient *sbbClient;
 
 @end
 
@@ -41,6 +42,9 @@ static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
     self.stationsArray = [[NSMutableArray alloc] init];
     
     self.title = @"Stations";
+    
+    self.sbbClient = [SBBClient sharedSBBClient];
+    [self.sbbClient setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,26 +102,28 @@ static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
 
 -(IBAction)didTapLoadButton:(id)sender {
     
-    NSString *requestUrlString = [NSString stringWithFormat:@"%@locations?query=Zuerich", BaseURLString];
-    NSURL *requestUrl = [NSURL URLWithString:requestUrlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestUrl];
+    [self.sbbClient getStationsListForLocation:@"Zuerich"];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-       
-        NSDictionary *responseDict = (NSDictionary *)responseObject;
-        [self parseDataFromDictionary:responseDict];
-        [self.tableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        NSLog(@"Request failed with error: %@", [error localizedDescription]);
-        
-    }];
-    
-    [operation start];
+//    NSString *requestUrlString = [NSString stringWithFormat:@"%@locations?query=Zuerich", BaseURLString];
+//    NSURL *requestUrl = [NSURL URLWithString:requestUrlString];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:requestUrl];
+//    
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+//    
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//       
+//        NSDictionary *responseDict = (NSDictionary *)responseObject;
+//        [self parseDataFromDictionary:responseDict];
+//        [self.tableView reloadData];
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        
+//        NSLog(@"Request failed with error: %@", [error localizedDescription]);
+//        
+//    }];
+//    
+//    [operation start];
     
 }
 
@@ -133,6 +139,17 @@ static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
         [self.stationsArray addObject:station];
         
     }
+}
+
+#pragma mark -
+#pragma mark SBBClientDelegate methods
+
+-(void)sbbClient:(SBBClient *)client didUpdateStations:(id)stationsList {
+    
+    NSDictionary *stationsDictionary = (NSDictionary *)stationsList;
+    [self parseDataFromDictionary:stationsDictionary];
+    [self.tableView reloadData];
+    
 }
 
 @end

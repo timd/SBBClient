@@ -24,6 +24,7 @@
 		22C162151973AD2500A9F8D4 /* NetworkingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C162141973AD2500A9F8D4 /* NetworkingTests.m */; };
 		22C162251973B68B00A9F8D4 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C162241973B68B00A9F8D4 /* Station.m */; };
 		22C162271973BE6200A9F8D4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C162261973BE6200A9F8D4 /* MapKit.framework */; };
+		22C1622A1973D54900A9F8D4 /* SBBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C162291973D54900A9F8D4 /* SBBClient.m */; };
 		EAEBF1E5365A4C059BB4BC83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03070281093A4986A44A4951 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		22C162231973B68B00A9F8D4 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
 		22C162241973B68B00A9F8D4 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		22C162261973BE6200A9F8D4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		22C162281973D54900A9F8D4 /* SBBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBClient.h; sourceTree = "<group>"; };
+		22C162291973D54900A9F8D4 /* SBBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBClient.m; sourceTree = "<group>"; };
 		C4112DE364414FF99738E190 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +135,8 @@
 				22C162241973B68B00A9F8D4 /* Station.m */,
 				22C1621E1973B62900A9F8D4 /* App Delegate */,
 				22C161F81973AD2500A9F8D4 /* Main.storyboard */,
+				22C162281973D54900A9F8D4 /* SBBClient.h */,
+				22C162291973D54900A9F8D4 /* SBBClient.m */,
 				22C1621F1973B63300A9F8D4 /* View controllers */,
 				22C162011973AD2500A9F8D4 /* Images.xcassets */,
 				22C161ED1973AD2500A9F8D4 /* Supporting Files */,
@@ -322,6 +327,7 @@
 			files = (
 				22C161F71973AD2500A9F8D4 /* AppDelegate.m in Sources */,
 				22C162251973B68B00A9F8D4 /* Station.m in Sources */,
+				22C1622A1973D54900A9F8D4 /* SBBClient.m in Sources */,
 				22C161FD1973AD2500A9F8D4 /* MasterViewController.m in Sources */,
 				22C161F31973AD2500A9F8D4 /* main.m in Sources */,
 				22C162001973AD2500A9F8D4 /* DetailViewController.m in Sources */,
