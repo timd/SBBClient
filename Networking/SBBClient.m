@@ -73,8 +73,8 @@ static NSString * const kSbbUrlString = @"http://transport.opendata.ch/v1/";
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"station"] = @"Uitliberg";
-    parameters[@"limit"] = @"1";
+    parameters[@"station"] = [NSString stringWithFormat:@"%@", stationId];
+    //parameters[@"limit"] = @"1";
     
     [self GET:@"stationboard" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         

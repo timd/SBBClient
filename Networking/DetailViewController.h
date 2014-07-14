@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Station.h"
+#import "SBBClient.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SBBClientDelegate>
 
 @property (strong, nonatomic) Station *station;
 
