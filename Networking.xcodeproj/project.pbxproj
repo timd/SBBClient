@@ -22,6 +22,9 @@
 		22C1620B1973AD2500A9F8D4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C161EA1973AD2500A9F8D4 /* UIKit.framework */; };
 		22C162131973AD2500A9F8D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22C162111973AD2500A9F8D4 /* InfoPlist.strings */; };
 		22C162151973AD2500A9F8D4 /* NetworkingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C162141973AD2500A9F8D4 /* NetworkingTests.m */; };
+		22C162251973B68B00A9F8D4 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C162241973B68B00A9F8D4 /* Station.m */; };
+		22C162271973BE6200A9F8D4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C162261973BE6200A9F8D4 /* MapKit.framework */; };
+		EAEBF1E5365A4C059BB4BC83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03070281093A4986A44A4951 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03070281093A4986A44A4951 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C161E31973AD2400A9F8D4 /* Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Networking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C161E61973AD2400A9F8D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22C161E81973AD2400A9F8D4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,6 +60,10 @@
 		22C162101973AD2500A9F8D4 /* NetworkingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NetworkingTests-Info.plist"; sourceTree = "<group>"; };
 		22C162121973AD2500A9F8D4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22C162141973AD2500A9F8D4 /* NetworkingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkingTests.m; sourceTree = "<group>"; };
+		22C162231973B68B00A9F8D4 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		22C162241973B68B00A9F8D4 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
+		22C162261973BE6200A9F8D4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C4112DE364414FF99738E190 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +71,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C162271973BE6200A9F8D4 /* MapKit.framework in Frameworks */,
 				22C161E91973AD2400A9F8D4 /* CoreGraphics.framework in Frameworks */,
 				22C161EB1973AD2500A9F8D4 /* UIKit.framework in Frameworks */,
 				22C161E71973AD2400A9F8D4 /* Foundation.framework in Frameworks */,
+				EAEBF1E5365A4C059BB4BC83 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +99,7 @@
 				22C1620E1973AD2500A9F8D4 /* NetworkingTests */,
 				22C161E51973AD2400A9F8D4 /* Frameworks */,
 				22C161E41973AD2400A9F8D4 /* Products */,
+				C4112DE364414FF99738E190 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,10 +115,12 @@
 		22C161E51973AD2400A9F8D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22C162261973BE6200A9F8D4 /* MapKit.framework */,
 				22C161E61973AD2400A9F8D4 /* Foundation.framework */,
 				22C161E81973AD2400A9F8D4 /* CoreGraphics.framework */,
 				22C161EA1973AD2500A9F8D4 /* UIKit.framework */,
 				22C162081973AD2500A9F8D4 /* XCTest.framework */,
+				03070281093A4986A44A4951 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -115,13 +128,11 @@
 		22C161EC1973AD2500A9F8D4 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				22C161F51973AD2500A9F8D4 /* AppDelegate.h */,
-				22C161F61973AD2500A9F8D4 /* AppDelegate.m */,
+				22C162231973B68B00A9F8D4 /* Station.h */,
+				22C162241973B68B00A9F8D4 /* Station.m */,
+				22C1621E1973B62900A9F8D4 /* App Delegate */,
 				22C161F81973AD2500A9F8D4 /* Main.storyboard */,
-				22C161FB1973AD2500A9F8D4 /* MasterViewController.h */,
-				22C161FC1973AD2500A9F8D4 /* MasterViewController.m */,
-				22C161FE1973AD2500A9F8D4 /* DetailViewController.h */,
-				22C161FF1973AD2500A9F8D4 /* DetailViewController.m */,
+				22C1621F1973B63300A9F8D4 /* View controllers */,
 				22C162011973AD2500A9F8D4 /* Images.xcassets */,
 				22C161ED1973AD2500A9F8D4 /* Supporting Files */,
 			);
@@ -157,6 +168,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		22C1621E1973B62900A9F8D4 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				22C161F51973AD2500A9F8D4 /* AppDelegate.h */,
+				22C161F61973AD2500A9F8D4 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		22C1621F1973B63300A9F8D4 /* View controllers */ = {
+			isa = PBXGroup;
+			children = (
+				22C161FB1973AD2500A9F8D4 /* MasterViewController.h */,
+				22C161FC1973AD2500A9F8D4 /* MasterViewController.m */,
+				22C161FE1973AD2500A9F8D4 /* DetailViewController.h */,
+				22C161FF1973AD2500A9F8D4 /* DetailViewController.m */,
+			);
+			name = "View controllers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22C162181973AD2500A9F8D4 /* Build configuration list for PBXNativeTarget "Networking" */;
 			buildPhases = (
+				9154C386CB474E3B9E46E2CE /* Check Pods Manifest.lock */,
 				22C161DF1973AD2400A9F8D4 /* Sources */,
 				22C161E01973AD2400A9F8D4 /* Frameworks */,
 				22C161E11973AD2400A9F8D4 /* Resources */,
+				73D5481066C34B2F89B367A2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -249,12 +282,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		73D5481066C34B2F89B367A2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9154C386CB474E3B9E46E2CE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22C161DF1973AD2400A9F8D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				22C161F71973AD2500A9F8D4 /* AppDelegate.m in Sources */,
+				22C162251973B68B00A9F8D4 /* Station.m in Sources */,
 				22C161FD1973AD2500A9F8D4 /* MasterViewController.m in Sources */,
 				22C161F31973AD2500A9F8D4 /* main.m in Sources */,
 				22C162001973AD2500A9F8D4 /* DetailViewController.m in Sources */,
@@ -379,6 +446,7 @@
 		};
 		22C162191973AD2500A9F8D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4112DE364414FF99738E190 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -392,6 +460,7 @@
 		};
 		22C1621A1973AD2500A9F8D4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4112DE364414FF99738E190 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -462,6 +531,7 @@
 				22C1621A1973AD2500A9F8D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22C1621B1973AD2500A9F8D4 /* Build configuration list for PBXNativeTarget "NetworkingTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +540,7 @@
 				22C1621D1973AD2500A9F8D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

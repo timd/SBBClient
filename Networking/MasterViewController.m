@@ -10,9 +10,15 @@
 
 #import "DetailViewController.h"
 
-@interface MasterViewController () {
-    NSMutableArray *_objects;
-}
+#import <AFNetworking/AFHTTPRequestOperation.h>
+#import "Station.h"
+
+static NSString * const BaseURLString = @"http://transport.opendata.ch/v1/";
+
+@interface MasterViewController ()
+
+@property (nonatomic, strong) NSMutableArray *stationsArray;
+
 @end
 
 @implementation MasterViewController
@@ -28,24 +34,17 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *loadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didTapLoadButton:)];
+    self.navigationItem.rightBarButtonItem = loadButton;
+    
+    self.stationsArray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table View
@@ -57,15 +56,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return [self.stationsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    Station *station = [self.stationsArray objectAtIndex:indexPath.row];
+    NSString *name = station.name;
+    
+    [cell.textLabel setText:name];
+    
     return cell;
 }
 
@@ -75,38 +77,59 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        
+        Station *selectedStation = [self.stationsArray objectAtIndex:indexPath.row];
+        [[segue destinationViewController] setDetailItem:selectedStation];
+        
+    }
+}
+
+
+#pragma mark -
+#pragma mark Interaction methods
+
+-(IBAction)didTapLoadButton:(id)sender {
+    
+    NSString *requestUrlString = [NSString stringWithFormat:@"%@locations?query=Zuerich", BaseURLString];
+    NSURL *requestUrl = [NSURL URLWithString:requestUrlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestUrl];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+       
+        NSDictionary *responseDict = (NSDictionary *)responseObject;
+        [self parseDataFromDictionary:responseDict];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Request failed with error: %@", [error localizedDescription]);
+        
+    }];
+    
+    [operation start];
+    
+}
+
+-(void)parseDataFromDictionary:(NSDictionary *)dictionary {
+
+    NSArray *stationsArray = [dictionary objectForKey:@"stations"];
+    
+    for (NSDictionary *stationDict in stationsArray) {
+        
+        NSError *error = nil;
+        Station *station = [MTLJSONAdapter modelOfClass:[Station class] fromJSONDictionary:stationDict error:&error];
+
+        [self.stationsArray addObject:station];
+        
     }
 }
 
